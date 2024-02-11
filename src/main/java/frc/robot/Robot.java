@@ -19,10 +19,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
+	// MyMotor objects
 	private MyMotor motor1;
 	private MyMotor motor2;
 	private MyMotor motor3;
 	private MyMotor motor4;
+
+	// Keeps track of the previous state, since if somehow contact with Shuffleboard
+	// or Smartdashboard is lost it doesn't just skip around, and updates on next
+	// check, and if you really do need the motors to stop, you can always disable
+	// or turn off the power on the robot. Essentially trades safety with
+	// operability.
+	private boolean toggleFlag1;
+	private boolean toggleFlag2;
+	private boolean toggleFlag3;
+	private boolean toggleFlag4;
+
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any
@@ -30,9 +42,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		motor1 = new MyMotor(40);
-		motor2 = new MyMotor(41);
-		motor3 = new MyMotor(42);
+		motor1 = new MyMotor(0);
+		motor2 = new MyMotor(0);
+		motor3 = new MyMotor(0);
 	}
 
 	@Override
@@ -47,81 +59,24 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 	}
 
-	// Just the bunch of variables used by the motor test program
-
-	// private MyMotor[] motorArray = new MyMotor[]{motor1, motor2, motor3, motor4};
-
 	@Override
 	public void teleopInit() {
-
-		// motor4 = new MyMotor(0);
-
-		// motor1.getMotor().restoreFactoryDefaults();
-		// motor1.getMotor().clearFaults();
-		// motor2.getMotor().restoreFactoryDefaults();
-		// motor2.getMotor().clearFaults();
-		// motor3.getMotor().restoreFactoryDefaults();
-		// motor3.getMotor().clearFaults();
-		// motor4.getMotor().restoreFactoryDefaults();
-		// motor4.getMotor().clearFaults();
-
-		// motor2.setInverted(true);
-		// motor3.setInverted(false);
-		// motor3.setFollower(41);
-
-		// SmartDashboard.putNumber("Motor 1 CAN", 0.0);
-		// SmartDashboard.putNumber("Motor 2 CAN", 0.0);
-		// SmartDashboard.putNumber("Motor 3 CAN", 0.0);
-		// SmartDashboard.putNumber("Motor 4 CAN", 0.0);
-
-		SmartDashboard.putNumber("Motor 1 Power", 0.0);
-		SmartDashboard.putNumber("Motor 2 Power", 0.0);
-		SmartDashboard.putNumber("Motor 3 Power", 0.0);
-		// SmartDashboard.putNumber("Motor 4 Power", 0.0);
-
-		SmartDashboard.putBoolean("Motor 1 Toggle", false);
-		SmartDashboard.putBoolean("Motor 2 Toggle", false);
-		SmartDashboard.putBoolean("Motor 3 Toggle", false);
-		// SmartDashboard.putBoolean("Motor 4 Toggle", false);
 	}
 
+	/**
+	 * This this is so, so ugly, but it works.
+	 * There is definitely a better way to do this, no doubt in my mind, but this is
+	 * what works right now sooooo
+	 * 
+	 * @param key Key of the number to be interpreting
+	 * @return Integer version of the read number
+	 */
 	public int smartDashboardGetInteger(String key) {
 		return Integer.parseInt(Long.toString(Math.round(SmartDashboard.getNumber(key, 0))));
 	}
 
-	boolean toggleFlag = false;
-
 	@Override
 	public void teleopPeriodic() {
-		// motor1.setCAN(smartDashboardGetInteger("Motor 1 CAN"));
-		// motor2.setCAN(smartDashboardGetInteger("Motor 2 CAN"));
-		// motor3.setCAN(smartDashboardGetInteger("Motor 3 CAN"));
-		// motor4.setCAN(smartDashboardGetInteger("Motor 4 CAN"));
-
-		if(SmartDashboard.getBoolean("Motor 2 Toggle", toggleFlag) != toggleFlag) toggleFlag = !toggleFlag;
-		SmartDashboard.putBoolean("Toggler", toggleFlag);
-
-		if (SmartDashboard.getBoolean("Motor 1 Toggle", false)) {
-			motor1.setPower(SmartDashboard.getNumber("Motor 1 Power", 0.0));
-		} else { 
-			motor1.stopMotor();
-		}
-		if (SmartDashboard.getBoolean("Motor 2 Toggle", toggleFlag)) {
-			motor2.setPower(SmartDashboard.getNumber("Motor 2 Power", 0.0));
-		} else {
-			motor2.stopMotor();
-		}
-		if (SmartDashboard.getBoolean("Motor 3 Toggle", true)) {
-			motor3.setPower(SmartDashboard.getNumber("Motor 3 Power", 0.0));
-		} else {
-			motor3.stopMotor();
-		}
-		// }
-		// if (SmartDashboard.getBoolean("Motor 4 Toggle", false)) {
-		// 	motor4.setPower(SmartDashboard.getNumber("Motor 4 Power", 0.0));
-		// } else {
-		// 	motor4.stopMotor();
-		// }
 	}
 
 	@Override
@@ -134,10 +89,95 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void testInit() {
+		motor1.setCAN(0);
+		motor2.setCAN(0);
+		motor3.setCAN(0);
+		motor4.setCAN(0);
+
+		// motor1.getMotor().restoreFactoryDefaults();
+		// motor1.getMotor().clearFaults();
+		// motor2.getMotor().restoreFactoryDefaults();
+		// motor2.getMotor().clearFaults();
+		// motor3.getMotor().restoreFactoryDefaults();
+		// motor3.getMotor().clearFaults();
+		// motor4.getMotor().restoreFactoryDefaults();
+		// motor4.getMotor().clearFaults();
+
+		SmartDashboard.putNumber("Motor 1 CAN", 0.0);
+		SmartDashboard.putNumber("Motor 2 CAN", 0.0);
+		SmartDashboard.putNumber("Motor 3 CAN", 0.0);
+		SmartDashboard.putNumber("Motor 4 CAN", 0.0);
+
+		SmartDashboard.putNumber("Motor 1 Power", 0.0);
+		SmartDashboard.putNumber("Motor 2 Power", 0.0);
+		SmartDashboard.putNumber("Motor 3 Power", 0.0);
+		SmartDashboard.putNumber("Motor 4 Power", 0.0);
+
+		SmartDashboard.putBoolean("Motor 1 Toggle", false);
+		SmartDashboard.putBoolean("Motor 2 Toggle", false);
+		SmartDashboard.putBoolean("Motor 3 Toggle", false);
+		SmartDashboard.putBoolean("Motor 4 Toggle", false);
 	}
 
 	@Override
 	public void testPeriodic() {
+
+		// Normally setting the CAN over and over is a terrible idea and you should
+		// never do it, but the MyMotor class takes care of it for me and makes it so
+		// it's okay
+		motor1.setCAN(smartDashboardGetInteger("Motor 1 CAN"));
+		motor2.setCAN(smartDashboardGetInteger("Motor 2 CAN"));
+		motor3.setCAN(smartDashboardGetInteger("Motor 3 CAN"));
+		motor4.setCAN(smartDashboardGetInteger("Motor 4 CAN"));
+
+		// sets state of toggleFlag
+		if (SmartDashboard.getBoolean("Motor 1 Toggle", toggleFlag1) != toggleFlag1)
+			toggleFlag1 = !toggleFlag1;
+		if (SmartDashboard.getBoolean("Motor 2 Toggle", toggleFlag2) != toggleFlag2)
+			toggleFlag2 = !toggleFlag2;
+		if (SmartDashboard.getBoolean("Motor 3 Toggle", toggleFlag3) != toggleFlag3)
+			toggleFlag3 = !toggleFlag3;
+		if (SmartDashboard.getBoolean("Motor 4 Toggle", toggleFlag4) != toggleFlag4)
+			toggleFlag4 = !toggleFlag4;
+
+		// sends toggleFlag to SmartDashboard
+		SmartDashboard.putBoolean("Toggler", toggleFlag1);
+		SmartDashboard.putBoolean("Toggler", toggleFlag2);
+		SmartDashboard.putBoolean("Toggler", toggleFlag3);
+		SmartDashboard.putBoolean("Toggler", toggleFlag4);
+
+		// Actual motor logic
+
+		// Turn off if the toggle is FALSE
+		// Turn on and use the set power if the toggle is true
+		if (SmartDashboard.getBoolean("Motor 1 Toggle", toggleFlag1)) {
+			motor1.setPower(SmartDashboard.getNumber("Motor 1 Power", 0.0));
+		} else {
+			motor1.stopMotor(); // Pretty much the same as .set(0.0)
+		}
+		if (SmartDashboard.getBoolean("Motor 2 Toggle", toggleFlag2)) {
+			motor2.setPower(SmartDashboard.getNumber("Motor 2 Power", 0.0));
+		} else {
+			motor2.stopMotor();
+		}
+		if (SmartDashboard.getBoolean("Motor 3 Toggle", toggleFlag3)) {
+			motor3.setPower(SmartDashboard.getNumber("Motor 3 Power", 0.0));
+		} else {
+			motor3.stopMotor();
+		}
+		if (SmartDashboard.getBoolean("Motor 4 Toggle", toggleFlag4)) {
+			motor4.setPower(SmartDashboard.getNumber("Motor 4 Power", 0.0));
+		} else {
+			motor4.stopMotor();
+		}
+
+		/* 	FYI, .set(0.0) and .stopMotor() both idle the motor and it uses its set idle
+			behavior.
+			You have to use .setIdleBehavior in order to set it to the idle mode
+			appropriate for the situation.
+			For the longevity of the robot and the motors, if you can justify using
+			coast, use coast whenever you can.
+		*/
 	}
 
 	@Override

@@ -12,7 +12,7 @@ The only elements you need to worry about in operating the motor tester is the "
   - Turns the motor on and off separately from Motor Power
   - Listed as "Motor X Toggle" where X is 1, 2, 3, or 4
 - Motor Power
-  - The power fed into the .set() method
+  - The power fed into the `.set()` method
   - Accepts a number from -1 to +1, and anywhere in between
   - Negative numbers mean run backwards
   - 0 is the same thing as turning the motor off

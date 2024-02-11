@@ -7,7 +7,8 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 /**
- * Motor Controller wrapper class made specifically for control with the RIO
+ * Motor Controller wrapper class made specifically for control in this context
+ * Allows me to be lazy with how I setup Robot.java :)
  * 
  * @author William Hiers
  * @since 1/29/24

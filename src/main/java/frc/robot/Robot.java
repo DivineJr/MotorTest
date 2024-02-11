@@ -141,10 +141,10 @@ public class Robot extends TimedRobot {
 			toggleFlag4 = !toggleFlag4;
 
 		// sends toggleFlag to SmartDashboard
-		SmartDashboard.putBoolean("Toggler", toggleFlag1);
-		SmartDashboard.putBoolean("Toggler", toggleFlag2);
-		SmartDashboard.putBoolean("Toggler", toggleFlag3);
-		SmartDashboard.putBoolean("Toggler", toggleFlag4);
+		SmartDashboard.putBoolean("Toggler1", toggleFlag1);
+		SmartDashboard.putBoolean("Toggler2", toggleFlag2);
+		SmartDashboard.putBoolean("Toggler3", toggleFlag3);
+		SmartDashboard.putBoolean("Toggler4", toggleFlag4);
 
 		// Actual motor logic
 

@@ -4,8 +4,14 @@
 
 package frc.robot;
 
+import java.util.List;
+
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -51,16 +57,33 @@ public class Robot extends TimedRobot {
 	public void robotPeriodic() {
 	}
 
+	// Using Autonomous Init to add things to shuffleboard, it will most definitely crash if the things  are already there but that's an issue for future me to deal with, and what I'm testing to see if I can get around anyways 
 	@Override
 	public void autonomousInit() {
+		ShuffleboardTab theTab = Shuffleboard.getTab("Test Tab");
+		GenericEntry entry1 = theTab.addPersistent("Persistent Test", 0.0).getEntry();
+		GenericEntry entry2 = theTab.add("String Test", "a string").getEntry();
+		GenericEntry entry3 = theTab.add("Number Test", 1004).getEntry();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 	}
 
+	// Using teleop init to read things off the shuffleboard without actually having the variables to see if I can test to see if a thing is on the shuffleboard or not
 	@Override
 	public void teleopInit() {
+		ShuffleboardTab theTab = Shuffleboard.getTab("Test Tab");
+
+		List<ShuffleboardComponent<?>> test = theTab.getComponents();
+
+		SimpleWidget test2 = (SimpleWidget)test.get(1);
+
+		System.out.println(test2.getEntry().getString("Nothing!"));
+		
+		// Note: HOLY CRAP IT WORKED NO WAY
+		//		 so in the future, likelihood is that this would get whatever was added second, which does not always line up to what's in the code, so I'll have to make some sort of automated checker for this
+		//       anyways, this is very cool :)
 	}
 
 	/**

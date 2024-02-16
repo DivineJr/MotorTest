@@ -77,9 +77,14 @@ public class Robot extends TimedRobot {
 
 		List<ShuffleboardComponent<?>> test = theTab.getComponents();
 
-		SimpleWidget test2 = (SimpleWidget)test.get(1);
+		ShuffleboardComponent<?> test1 = (SimpleWidget)test.get(0);
+		ShuffleboardComponent<?> test2 = (SimpleWidget)test.get(1);
+		ShuffleboardComponent<?> test3 = (SimpleWidget)test.get(2);
 
-		System.out.println(test2.getEntry().getString("Nothing!"));
+		System.out.println(test1.getClass() + " | " +  test2.getClass() + " | " + test3.getClass());
+
+
+		// System.out.println(test2.getEntry().getString("Nothing!"));
 		
 		// Note: HOLY CRAP IT WORKED NO WAY
 		//		 so in the future, likelihood is that this would get whatever was added second, which does not always line up to what's in the code, so I'll have to make some sort of automated checker for this

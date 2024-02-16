@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
 		motor1 = new MyMotor(0);
 		motor2 = new MyMotor(0);
 		motor3 = new MyMotor(0);
+		motor4 = new MyMotor(0);
 	}
 
 	@Override

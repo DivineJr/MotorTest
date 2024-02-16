@@ -112,6 +112,9 @@ public class MyMotor {
      * @param idleMode true = brake, false = coast
      */
     public void setIdleMode(boolean idleMode) {
+        if(motor == null) {
+            return;
+        }
         if (idleMode) {
             motor.setIdleMode(IdleMode.kBrake);
         } else {
@@ -123,9 +126,12 @@ public class MyMotor {
      * <p>
      * Returns the idle mode as a boolean
      * </p>
-     * true = brake, false = coast
+     * true = brake, false = coast (or null motor oopsies)
      */
     public boolean getIdleMode() {
+        if(motor == null) {
+            return false;
+        }
         if (motor.getIdleMode() == IdleMode.kBrake) {
             return true;
         } else {
@@ -139,6 +145,9 @@ public class MyMotor {
      * @param isInverted true = inverted, false = normal
      */
     public void setInverted(boolean isInverted) {
+        if(motor == null) {
+            return;
+        }
         motor.setInverted(isInverted);
     }
 
@@ -148,6 +157,9 @@ public class MyMotor {
      * @param canID
      */
     public void setFollower(int canID) {
+        if(motor == null) {
+            return;
+        }
         motor.follow(ExternalFollower.kFollowerSpark, canID);
     }
 
@@ -159,6 +171,9 @@ public class MyMotor {
      *                   the following motor
      */
     public void setFollower(int canID, boolean isInverted) {
+        if(motor == null) {
+            return;
+        }
         motor.follow(ExternalFollower.kFollowerSpark, canID, isInverted);
     }
 

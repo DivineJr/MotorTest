@@ -130,6 +130,7 @@ public class Robot extends TimedRobot {
 		motor3.setCAN(smartDashboardGetInteger("Motor 3 CAN"));
 		motor4.setCAN(smartDashboardGetInteger("Motor 4 CAN"));
 
+		
 		// sets state of toggleFlag
 		if (SmartDashboard.getBoolean("Motor 1 Toggle", toggleFlag1) != toggleFlag1)
 			toggleFlag1 = !toggleFlag1;

@@ -89,6 +89,8 @@ public class Robot extends TimedRobot {
 		// Note: HOLY CRAP IT WORKED NO WAY
 		//		 so in the future, likelihood is that this would get whatever was added second, which does not always line up to what's in the code, so I'll have to make some sort of automated checker for this
 		//       anyways, this is very cool :)
+
+		System.out.println(theTab.add("Test Thing!", "ok").getEntry().getTopic().getName());
 	}
 
 	/**

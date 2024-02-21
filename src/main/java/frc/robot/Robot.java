@@ -118,6 +118,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Motor 2 Toggle", false);
 		SmartDashboard.putBoolean("Motor 3 Toggle", false);
 		SmartDashboard.putBoolean("Motor 4 Toggle", false);
+
+		SmartDashboard.putBoolean(("Motor 1 Invert"), false);
+		SmartDashboard.putBoolean(("Motor 2 Invert"), false);
+		SmartDashboard.putBoolean(("Motor 3 Invert"), false);
+		SmartDashboard.putBoolean(("Motor 4 Invert"), false);
+
 	}
 
 	@Override
@@ -152,22 +158,22 @@ public class Robot extends TimedRobot {
 		// Turn off if the toggle is FALSE
 		// Turn on and use the set power if the toggle is true
 		if (SmartDashboard.getBoolean("Motor 1 Toggle", toggleFlag1)) {
-			motor1.setPower(SmartDashboard.getNumber("Motor 1 Power", 0.0));
+			motor1.setPower(SmartDashboard.getNumber("Motor 1 Power", 0.0) * (SmartDashboard.getBoolean("Motor 1 Invert", false) ? 1 : -1));
 		} else {
 			motor1.stopMotor(); // Pretty much the same as .set(0.0)
 		}
 		if (SmartDashboard.getBoolean("Motor 2 Toggle", toggleFlag2)) {
-			motor2.setPower(SmartDashboard.getNumber("Motor 2 Power", 0.0));
+			motor2.setPower(SmartDashboard.getNumber("Motor 2 Power", 0.0) * (SmartDashboard.getBoolean("Motor 2 Invert", false) ? 1 : -1));
 		} else {
 			motor2.stopMotor();
 		}
 		if (SmartDashboard.getBoolean("Motor 3 Toggle", toggleFlag3)) {
-			motor3.setPower(SmartDashboard.getNumber("Motor 3 Power", 0.0));
+			motor3.setPower(SmartDashboard.getNumber("Motor 3 Power", 0.0) * (SmartDashboard.getBoolean("Motor 3 Invert", false) ? 1 : -1));
 		} else {
 			motor3.stopMotor();
 		}
 		if (SmartDashboard.getBoolean("Motor 4 Toggle", toggleFlag4)) {
-			motor4.setPower(SmartDashboard.getNumber("Motor 4 Power", 0.0));
+			motor4.setPower(SmartDashboard.getNumber("Motor 4 Power", 0.0) * (SmartDashboard.getBoolean("Motor 4 Invert", false) ? 1 : -1));
 		} else {
 			motor4.stopMotor();
 		}

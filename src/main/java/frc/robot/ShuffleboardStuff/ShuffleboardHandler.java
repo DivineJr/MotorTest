@@ -1,5 +1,9 @@
 package frc.robot.ShuffleboardStuff;
 
+import java.util.ArrayList;
+
+import frc.robot.ShuffleboardStuff.ShuffleList.ShuffleListNode;
+
 /**
  * Handles initialization of shuffleboard
  * 
@@ -24,6 +28,34 @@ public class ShuffleboardHandler {
      * What's the point of this class? To eliminate errors caused by existing widgets in the Shuffleboard on creation
      * 
      */
+
+    private ShuffleList shuffleList;
+    private ArrayList<String> titleList = new ArrayList<String>();
+
+    public ShuffleboardHandler(ShuffleList shuffleList) {
+        this.shuffleList = shuffleList;
+        constructorLogic();
+    }
+
+    public ShuffleboardHandler(ShuffleListNode[] nodeList) {
+        shuffleList = new ShuffleList(nodeList);
+        constructorLogic();
+    }
+
+    private void constructorLogic() {
+        ShuffleListNode<?> test = shuffleList.getListHead();
+
+        while(test != null) {
+            titleList.add(test.getTitle());
+            test = test.getNextNode();
+        }
+
+        for(int i = 0 ; i < titleList.size(); i++) {
+            System.out.print(titleList.get(i) + " | ");
+        }
+        System.out.print("\n");
+    }
+
 
     
     

@@ -7,6 +7,11 @@ package frc.robot;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.ShuffleboardStuff.EntryProperties;
+import frc.robot.ShuffleboardStuff.ShuffleList;
+import frc.robot.ShuffleboardStuff.ShuffleboardHandler;
+import frc.robot.ShuffleboardStuff.ShuffleList.DataType;
+import frc.robot.ShuffleboardStuff.ShuffleList.ShuffleListNode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -53,6 +58,12 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+		System.out.println(((Double)(0.0)).getClass());
+		System.out.println(((Integer)(0)).getClass());
+		System.out.println(((Boolean)(true)).getClass());
+		System.out.println(((String)("")).getClass());
+
+
 	}
 
 	@Override
@@ -61,6 +72,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		ShuffleboardHandler test = new ShuffleboardHandler(new ShuffleList(new ShuffleListNode<?>[]{new ShuffleListNode<Integer>("Part 1", DataType.Integer, -1, null), new ShuffleListNode<String>("Part 2!", DataType.String, "this is a string", null)}));
 	}
 
 	/**

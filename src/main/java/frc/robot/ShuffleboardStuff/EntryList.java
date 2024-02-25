@@ -9,9 +9,11 @@ package frc.robot.ShuffleboardStuff;
  */
 public class EntryList {
     /**
-     * Only node data should be Generic Entry
-     * handler should just .get() and then get the title off the entry
+     * Node can be a simple or complex widget now! ALthough I'm not sure how to handle that...
+     * Maybe a .getSimple and a .getComplex ?
      */
+    
+
 
 
     private class Node {
